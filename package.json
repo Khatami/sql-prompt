@@ -1,0 +1,67 @@
+{
+  "name": "sqlsense",
+  "displayName": "SQLSense",
+  "description": "An extension for SQL code completion and formatting in Azure Data Studio.",
+  "version": "0.1.0",
+  "publisher": "Seyedhamed Khatami",
+  "engines": {
+      "vscode": "^1.78.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+      "onLanguage:sql"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+      "languages": [
+          {
+              "id": "sql",
+              "aliases": ["SQL", "sql"],
+              "extensions": [".sql"]
+          }
+      ],
+      "commands": [
+          {
+              "command": "sqlsense.helloWorld",
+              "title": "Hello World"
+          }
+      ],
+      "menus": {
+          "editor/context": [
+              {
+                  "command": "sqlsense.helloWorld",
+                  "when": "editorLangId == sql",
+                  "group": "navigation"
+              }
+          ],
+          "commandPalette": [
+              {
+                  "command": "sqlsense.helloWorld",
+                  "when": "editorLangId == sql",
+                  "category": "SQLSense"
+              }
+          ]
+      },
+      "configuration": {
+          "type": "object",
+          "title": "SQLSense Settings",
+          "properties": {
+              "sqlsense.enableAutoComplete": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Enable or disable SQL auto-completion."
+              }
+          }
+      }
+  },
+  "scripts": {
+      "vscode:prepublish": "tsc -p ./",
+      "compile": "tsc -watch -p ./",
+      "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+      "typescript": "^5.0.0",
+      "vscode": "^1.78.0",
+      "eslint": "^8.0.0"
+  }
+}
