@@ -11,8 +11,25 @@ export function activate(context: vscode.ExtensionContext) {
         { language: 'sql', scheme: 'file' },
         {
             provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-                const completionItems: vscode.CompletionItem[] = [];
+                // Get the current line text
+                const lineText = document.lineAt(position).text;
 
+                // Get the text up to the cursor position
+                const textBeforeCursor = document
+                    .getText(new vscode.Range(new vscode.Position(0, 0), position));
+
+                // Optionally, get the entire document text
+                const fullText = document.getText();
+
+                // Use a regular expression to find the last word before the cursor
+                const lastWordMatch = textBeforeCursor.match(/\b\w+\b(?=\W*$)/);
+                var lastWord = lastWordMatch ? lastWordMatch[0] : '';
+                lastWord = lastWord. toUpperCase().trim();
+
+                // Split the text into words using a regular expression
+                const wordsBeforeCursor = textBeforeCursor.match(/\b\w+\b/g) || [];
+
+                const completionItems: vscode.CompletionItem[] = [];
                 // Simple SQL keywords
                 const keywords = ['SELECT', 'FROM', 'WHERE', 'INSERT', 'UPDATE', 'DELETE'];
                 for (const keyword of keywords) {
@@ -39,4 +56,4 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(helloWorldCommand, sqlCompletionProvider, sqlFormatterProvider);
 }
 
-export function deactivate() {}
+export function deactivate() { }
