@@ -13,6 +13,7 @@
 		"**/.vscode-test.mjs": true,
 		"**/LICENSE": true,
 		"**/package-lock.json": true,
+		"**/webpack.config.js": true,
         "**/src": false
     }
 }

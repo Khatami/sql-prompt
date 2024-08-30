@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { sqlCompletionProvider } from './CompletionProvider/sql';
+import { sqlCompletionProvider } from './completionProvider/sql';
 
 export function activate(context: vscode.ExtensionContext) {
     // Register the Hello World command
